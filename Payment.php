@@ -13,10 +13,10 @@
     {
 
     private $merchantToken = "Basic TUVSQ0hBTlRfQVBQOk1lcmNoYW50QEFkbWluIzEyMw==";  //this token is for test in development mode only.
-    private $username = "7503491464";  // merchant user ID will be provided by Nasswallet
-    private $password = "Nass#2020";    // merchant password 
+    private $username = "";  // merchant user ID will be provided by Nasswallet
+    private $password = "";    // merchant password 
     private $grantType = "password";   
-    private $transactionPin = "175017";   //merchant's MPIN.
+    private $transactionPin = "";   //merchant's MPIN.
     private $orderId = "263626";     //will be provided by the merchant
     private $amount = "10";          //will be provided by the merchant
     private $languageCode = "en";
