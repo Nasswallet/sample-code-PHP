@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\RequestException;
 
 require 'vendor/autoload.php';
 
-require 'Payment.php';
+require 'payment.php';
 
 
 
