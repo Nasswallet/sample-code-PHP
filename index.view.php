@@ -45,12 +45,11 @@
                 Make Test Payment
     
               </button>
-
               
             </div>
             <div class="pt-6 text-xs leading-6  sm:text-sm sm:leading-7">
               <div class="flex items-center text-gray-600 space-x-2">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
                 <p class="text-gray-700">
@@ -91,7 +90,9 @@
           action: 'pay'
         },
         success: function(response) {
-          window.open(response, "_blank" ,"width=850,height=700,left=600,top=200,resizable=0");
+        
+          window.location.assign(response);
+           
           $("#credit_card_icon").removeClass("animate-spin");
          },
         error: function (error) {
@@ -99,7 +100,9 @@
         $("#credit_card_icon").removeClass("animate-spin");
        }
       });
-    }
+    };
+
+    
   </script>
 
 

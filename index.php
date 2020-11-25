@@ -21,8 +21,7 @@ if (isset($_POST['action']) == 'pay') {
     $payment = new Payment();
     return $payment->makePayment();
 }
-
-
+ 
  
 
 

@@ -12,14 +12,13 @@ class Payment
 {
 
     private $merchantToken = "Basic TUVSQ0hBTlRfQVBQOk1lcmNoYW50QEFkbWluIzEyMw=="; 
-    private $username = "";  // merchant user ID will be provided by Nasswallet
-    private $password = "";    // merchant password 
+    private $username = "7500077974";  
+    private $password = "Nass@2020";    
     private $grantType = "password";
-    private $transactionPin = "";   //merchant's MPIN.
-    private $orderId = "263626";     //will be provided by the merchant
-    private $amount = "10";          //will be provided by the merchant
+    private $transactionPin = "135758";   
+    private $orderId = "263626";     
+    private $amount = "10";           
     private $languageCode = "en";
-
     private $client;
 
 
@@ -35,7 +34,6 @@ class Payment
     {
 
         $response = $this->getMerchantToken($this->client, $this->merchantToken);
-
         $payload = [
             'data' => [
                 'userIdentifier' => $this->username,
@@ -64,7 +62,7 @@ class Payment
         $response = json_decode($client->request('POST', 'login', [
             "headers" => ['authorization' => "$merchantToken"],
             'json' => $payload
-
+            
         ])->getBody());
 
 
@@ -78,16 +76,21 @@ class Payment
 
     public function payWithNasswallet($access_token, $payload)
     {
-
+ 
         $response = json_decode($this->client->request('POST', 'initTransaction', [
             "headers" => ['authorization' => "Bearer $access_token"],
             "json" => $payload
         ])->getBody());
 
         if ($response->responseCode == 0 && $response->data->transactionId) {
-
-            echo "https://uatcheckout.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
+            
+            echo "https://uatcheckout.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}" ;
+                
             //this is the final url format that the customer will be redirected to.
         }
+        
+
     }
+
+ 
 }
