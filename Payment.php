@@ -11,11 +11,11 @@ class Payment
 
 {
 
-    private $merchantToken = "Basic TUVSQ0hBTlRfQVBQOk1lcmNoYW50QEFkbWluIzEyMw=="; 
-    private $username = "7500077974";  
-    private $password = "Nass@2020";    
+    private $merchantToken = ""; 
+    private $username = "";  
+    private $password = "";    
     private $grantType = "password";
-    private $transactionPin = "135758";   
+    private $transactionPin = "";   
     private $orderId = "263626";     
     private $amount = "10";           
     private $languageCode = "en";
@@ -30,10 +30,34 @@ class Payment
         ]);
     }
 
-    public function makePayment()
-    {
 
-        $response = $this->getMerchantToken($this->client, $this->merchantToken);
+    public function loginWithMerchantAccount()
+    {     
+        $payload = [
+            "data" => [
+                "username" => $this->username,
+                "password" => $this->password,
+                "grantType" => $this->grantType
+            ]
+        ];
+
+        $response = json_decode($this->client->request('POST', 'login', [
+            "headers" => ['authorization' => "$this->merchantToken"],
+            'json' => $payload
+            
+        ])->getBody());
+
+        if ($response->responseCode == 0 && $response->data->access_token) {
+            $response =  $response->data->access_token;
+            $this->makeTransaction($response);
+        } else {
+            return 0;
+        }
+    }
+
+
+    public function makeTransaction($access_token)
+    {
         $payload = [
             'data' => [
                 'userIdentifier' => $this->username,
@@ -44,39 +68,6 @@ class Payment
             ]
         ];
 
-        $this->payWithNasswallet($response, $payload);
-        
-    }
-
-
-    public function getMerchantToken($client, $merchantToken)
-    {     //generates and returns a unique access token.
-        $payload = [
-            "data" => [
-                "username" => $this->username,
-                "password" => $this->password,
-                "grantType" => $this->grantType
-            ]
-        ];
-
-        $response = json_decode($client->request('POST', 'login', [
-            "headers" => ['authorization' => "$merchantToken"],
-            'json' => $payload
-            
-        ])->getBody());
-
-
-        if ($response->responseCode == 0 && $response->data->access_token) {
-            return $response->data->access_token;
-        } else {
-            return 0;
-        }
-    }
-
-
-    public function payWithNasswallet($access_token, $payload)
-    {
- 
         $response = json_decode($this->client->request('POST', 'initTransaction', [
             "headers" => ['authorization' => "Bearer $access_token"],
             "json" => $payload
@@ -84,13 +75,12 @@ class Payment
 
         if ($response->responseCode == 0 && $response->data->transactionId) {
             
-            echo "https://uatcheckout.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}" ;
+            echo "https://uatcheckout.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
                 
             //this is the final url format that the customer will be redirected to.
+
         }
         
-
     }
-
  
 }

@@ -19,7 +19,7 @@ require 'payment.php';
 
 if (isset($_POST['action']) == 'pay') {
     $payment = new Payment();
-    return $payment->makePayment();
+    return $payment->loginWithMerchantAccount();
 }
  
  
