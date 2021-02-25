@@ -1,6 +1,6 @@
 {
     "name": "nasswallet/php-code-sample",
-    "description": "This is to demonstrate the implementation of making request to nasswallet payment gateway with php",
+    "description": "This is to demonstrate the implementation of making request to NassWallet payment gateway with php",
     "require": {
         "guzzlehttp/guzzle": "^7.0"
     }
