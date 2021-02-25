@@ -12,7 +12,7 @@ class Payment
 {
 
     private $merchantToken = "Basic TUVSQ0hBTlRfUEFZTUVOVF9HQVRFV0FZOk1lcmNoYW50R2F0ZXdheUBBZG1pbiMxMjM="; 
-    private $username = "7500077974";  
+    private $username = "7518820130";  
     private $password = "Nass@2020";    
     private $grantType = "password";
     private $transactionPin = "135758";   
