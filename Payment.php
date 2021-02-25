@@ -11,11 +11,11 @@ class Payment
 
 {
 
-    private $merchantToken = ""; 
-    private $username = "";  
-    private $password = "";    
+    private $merchantToken = "Basic TUVSQ0hBTlRfUEFZTUVOVF9HQVRFV0FZOk1lcmNoYW50R2F0ZXdheUBBZG1pbiMxMjM="; 
+    private $username = "7500077974";  
+    private $password = "Nass@2020";    
     private $grantType = "password";
-    private $transactionPin = "";   
+    private $transactionPin = "135758";   
     private $orderId = "263626";     
     private $amount = "10";           
     private $languageCode = "en";
@@ -25,7 +25,7 @@ class Payment
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'https://uatgw.nasswallet.com/payment/transaction/',
+            'base_uri' => 'https://uatgw1.nasswallet.com/payment/transaction/',
             'timeout' => '1000'
         ]);
     }
@@ -47,15 +47,16 @@ class Payment
             
         ])->getBody());
 
+                
         if ($response->responseCode == 0 && $response->data->access_token) {
             $response =  $response->data->access_token;
             $this->makeTransaction($response);
         } else {
-            return 0;
+             return $response->message;
         }
     }
 
-
+    
     public function makeTransaction($access_token)
     {
         $payload = [
@@ -75,10 +76,11 @@ class Payment
 
         if ($response->responseCode == 0 && $response->data->transactionId) {
             
-            echo "https://uatcheckout.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
+            echo "https://uatcheckout1.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
                 
             //this is the final url format that the customer will be redirected to.
-
+        }else {
+            return "something went wrong!";
         }
         
     }

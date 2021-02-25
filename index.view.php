@@ -90,13 +90,13 @@
           action: 'pay'
         },
         success: function(response) {
-        
+
           window.location.assign(response);
            
           $("#credit_card_icon").removeClass("animate-spin");
          },
         error: function (error) {
-        console.log(error);
+        console.error(error);
         $("#credit_card_icon").removeClass("animate-spin");
        }
       });
