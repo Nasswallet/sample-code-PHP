@@ -12,12 +12,12 @@ class Payment
 {
 
     private $merchantToken = "Basic TUVSQ0hBTlRfUEFZTUVOVF9HQVRFV0FZOk1lcmNoYW50R2F0ZXdheUBBZG1pbiMxMjM="; 
-    private $username = "7518820130";  
-    private $password = "Nass@2020";    
+    private $username = "";  //merchant username
+    private $password = "";    //merchant password
     private $grantType = "password";
-    private $transactionPin = "135758";   
-    private $orderId = "263626";     
-    private $amount = "10";           
+    private $transactionPin = "";   
+    private $orderId = "263626";   //will be provided by the merchant
+    private $amount = "10";        // will be provided by the merchant   
     private $languageCode = "en";
     private $client;
 
