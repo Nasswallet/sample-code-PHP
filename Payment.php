@@ -15,8 +15,8 @@ class Payment
     private $username = "";  //merchant username
     private $password = "";    //merchant password
     private $grantType = "password";
-    private $transactionPin = "";   
-    private $orderId = "263626";   //will be provided by the merchant
+    private $transactionPin = ""; //Merchant MPIN   
+    private $orderId = "135758";   //will be provided by the merchant
     private $amount = "10";        // will be provided by the merchant   
     private $languageCode = "en";
     private $client;
@@ -76,7 +76,7 @@ class Payment
 
         if ($response->responseCode == 0 && $response->data->transactionId) {
             
-            echo "https://uatcheckout1.nasswallet.com/payment-gateway?id={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
+            echo "https://uatcheckout1.nasswallet.com/payment-gateway?={$response->data->transactionId}&token={$response->data->token}&userIdentifier={$this->username}";
                 
             //this is the final url format that the customer will be redirected to.
         }else {
